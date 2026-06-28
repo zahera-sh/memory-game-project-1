@@ -48,19 +48,33 @@ function handleClick(event) {
 
     const cardIndex = Number(event.target.id);
 
-    const clickedCard = gameBoard[cardIndex];
+    /*     const clickedCard = gameBoard[cardIndex]; */
 
     if (!firstCard) {
-        firstCard = clickedCard;
+        firstCard = cardIndex;
         console.log("First card:", firstCard);
     }
 
     else if (!secondCard) {
-        secondCard = clickedCard;
+        secondCard = cardIndex;
         console.log("Second card:", secondCard);
 
         lockBoard = true;
 
+        if (gameBoard[firstCard] === gameBoard[secondCard]) {
+            matchedCards.push(firstCard);
+            matchedCards.push(secondCard);
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+            console.log(matchedCards)
+        }
+
+        else {
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }
     }
 
 }

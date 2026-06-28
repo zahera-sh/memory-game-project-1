@@ -1,0 +1,28 @@
+* {
+    font-family: "acme", system-ui, sans-serif;
+}
+
+body {
+    background-color: blue;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 400px;
+    border: 3px solid rgb(255, 0, 0);
+}
+
+.crds {
+    width: 25%;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+    border: 3px solid black;
+}

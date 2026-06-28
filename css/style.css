@@ -25,4 +25,8 @@ body {
     aspect-ratio: 1/1;
     box-sizing: border-box;
     border: 3px solid black;
+    font-size: 250%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

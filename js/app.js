@@ -133,3 +133,5 @@ initGame()
 cardsEls.forEach((card) => {
     card.addEventListener("click", handleClick)
 })
+
+resetBtnEl.addEventListener("click", initGame)

@@ -17,6 +17,8 @@ const cards = [
 
 const board = [...cards, ...cards];
 
+const cardBack = "✿";
+
 /*---------------------------- Variables (state) ----------------------------*/
 
 let firstCard, secondCard;
@@ -30,14 +32,35 @@ let gameBoard;
 
 /*-------------------------------- Functions --------------------------------*/
 
-function initGame() {
-
-    gameBoard = board.sort(() => Math.random() - 0.5);
+function render() {
 
     cardsEls.forEach((card, index) => {
-        /*         card.textContent = gameBoard[index] */
-        card.textContent = "✿"
-    });
+        if (matchedCards.includes(index) || firstCard === index || secondCard === index) {
+            card.textContent = gameBoard[index];
+        }
+
+        else {
+            card.textContent = cardBack;
+        }
+    })
+
+}
+
+
+
+function initGame() {
+
+    gameBoard = [...board].sort(() => Math.random() - 0.5);
+
+    firstCard = null;
+    secondCard = null;
+    flippedCards = [];
+    matchedCards = [];
+    moves = 0;
+    winner = false;
+    lockBoard = false;
+
+    render()
 
 }
 
@@ -51,19 +74,27 @@ function handleClick(event) {
 
     /*     const clickedCard = gameBoard[cardIndex]; */
 
+    if (matchedCards.includes(cardIndex)) return;
+
     if (firstCard === null || firstCard === undefined) {
         firstCard = cardIndex;
         console.log("First card:", firstCard);
+
+        render();
+
+        return
     }
 
-    else if (!secondCard) {
+    else if (secondCard === null || secondCard === undefined) {
         if (firstCard === cardIndex) {
             console.log("SAME CARD")
             return
         }
-        
+
         secondCard = cardIndex;
         console.log("Second card:", secondCard);
+
+        render()
 
         lockBoard = true;
 
@@ -77,9 +108,17 @@ function handleClick(event) {
         }
 
         else {
-            firstCard = null;
-            secondCard = null;
-            lockBoard = false;
+
+            setTimeout(() => {
+
+                firstCard = null;
+                secondCard = null;
+
+                lockBoard = false;
+
+                render()
+
+            }, 1000)
         }
     }
 

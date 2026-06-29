@@ -122,8 +122,21 @@ function handleClick(event) {
         }
     }
 
+    checkForWinner()
+
+    render()
+
 }
 
+
+
+function checkForWinner() {
+        if (matchedCards.length === board.length) {
+            winner = true
+            console.log("WINNER!")
+            return
+        }
+}
 
 
 initGame()

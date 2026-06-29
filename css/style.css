@@ -12,6 +12,12 @@ body {
     align-items: center;
 }
 
+h1 {
+    font-size: 400%;
+    text-transform: uppercase;
+
+}
+
 .board {
     display: flex;
     flex-wrap: wrap;

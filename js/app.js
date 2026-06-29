@@ -3,10 +3,12 @@
 const cardsEls = document.querySelectorAll(".crds");
 const messageEl = document.querySelector("#message");
 const resetBtnEl = document.querySelector("#reset");
+const movesEl = document.querySelector("#moves")
 
 /* console.log(cardsEls)
 console.log(messageEl)
-console.log(resetBtnEl) */
+console.log(resetBtnEl)
+console.log(movesEl) */
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -44,6 +46,8 @@ function render() {
         }
     })
 
+    movesEl.textContent = `Moves: ${moves}`
+
 }
 
 
@@ -73,6 +77,9 @@ function handleClick(event) {
     const cardIndex = Number(event.target.id);
 
     /*     const clickedCard = gameBoard[cardIndex]; */
+
+    moves = Number(flippedCards +++1)
+        console.log(moves)
 
     if (matchedCards.includes(cardIndex)) return;
 

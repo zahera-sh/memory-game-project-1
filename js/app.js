@@ -35,7 +35,8 @@ function initGame() {
     gameBoard = board.sort(() => Math.random() - 0.5);
 
     cardsEls.forEach((card, index) => {
-        card.textContent = gameBoard[index]
+        /*         card.textContent = gameBoard[index] */
+        card.textContent = "✿"
     });
 
 }
@@ -50,12 +51,17 @@ function handleClick(event) {
 
     /*     const clickedCard = gameBoard[cardIndex]; */
 
-    if (!firstCard) {
+    if (firstCard === null || firstCard === undefined) {
         firstCard = cardIndex;
         console.log("First card:", firstCard);
     }
 
     else if (!secondCard) {
+        if (firstCard === cardIndex) {
+            console.log("SAME CARD")
+            return
+        }
+        
         secondCard = cardIndex;
         console.log("Second card:", secondCard);
 

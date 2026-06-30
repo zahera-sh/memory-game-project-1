@@ -4,11 +4,13 @@ const cardsEls = document.querySelectorAll(".crds");
 const messageEl = document.querySelector("#message");
 const resetBtnEl = document.querySelector("#reset");
 const movesEl = document.querySelector("#moves")
+const matchedEl = document.querySelector("#matched")
 
 /* console.log(cardsEls)
 console.log(messageEl)
 console.log(resetBtnEl)
-console.log(movesEl) */
+console.log(movesEl)
+console.log(matchedEl) */
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -31,6 +33,7 @@ let winner = false;
 let lockBoard = false;
 let message;
 let gameBoard;
+let matched = 0;
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -47,6 +50,7 @@ function render() {
     })
 
     movesEl.textContent = `Moves: ${moves}`
+    matchedEl.textContent = `Matched: ${matched}/8`
 
 }
 
@@ -75,6 +79,11 @@ function handleClick(event) {
     if (lockBoard) return;
 
     const cardIndex = Number(event.target.id);
+     
+    if (firstCard === cardIndex) {
+            console.log("SAME CARD")
+            return
+        }
 
     /*     const clickedCard = gameBoard[cardIndex]; */
 
@@ -93,10 +102,6 @@ function handleClick(event) {
     }
 
     else if (secondCard === null || secondCard === undefined) {
-        if (firstCard === cardIndex) {
-            console.log("SAME CARD")
-            return
-        }
 
         secondCard = cardIndex;
         console.log("Second card:", secondCard);
@@ -129,6 +134,8 @@ function handleClick(event) {
         }
     }
 
+    matched = Number(matchedCards.length /2)
+    
     checkForWinner()
 
     render()

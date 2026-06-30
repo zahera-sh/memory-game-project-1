@@ -19,7 +19,7 @@ const cards = [
 
 const board = [...cards, ...cards];
 
-const cardBack = "✿";
+const cardBack = "࣪ ִֶָ☾.";
 
 /*---------------------------- Variables (state) ----------------------------*/
 

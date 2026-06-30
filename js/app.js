@@ -60,6 +60,26 @@ function render() {
     movesEl.textContent = `Moves: ${moves}`;
     matchedEl.textContent = `Matched: ${matched} | ${gameLevel}`;
 
+    updateMessage()
+
+}
+
+
+
+function updateMessage() {
+
+    if (matchedCards.length === board.length){
+        messageEl.textContent = (`🥳: Congratulations, ${userName}. You won!`);
+    }
+    
+        else  if (matchedCards.length === board.length / 2) {
+        messageEl.textContent = (`😍: Good job, ${userName}. You're halfway there!`);
+    }
+
+    else if (moves >= board.length * 2 && matchedCards.length !== board.length) {
+        messageEl.textContent = (`🤔: Hmmm, maybe pay more attention, ${userName}?`);
+    }
+    
 }
 
 
@@ -81,7 +101,8 @@ function initGame() {
     winner = false;
     lockBoard = false;
     gameLevel = (Number(board.length)/2);
-
+    messageEl.textContent = `😊: Good luck, ${userName}!`;
+    
     render()
 
 }
@@ -151,7 +172,7 @@ function handleClick(event) {
     matched = Number(matchedCards.length /2);
     
     checkForWinner();
-
+    updateMessage()
     render();
 
 }

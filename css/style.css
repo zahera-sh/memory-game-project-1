@@ -1,6 +1,7 @@
 * {
 
     /* (#a84f76, #d86c9a, #e8b8c8, #ffd6e5, #fff0f6, #ffe4ec)) */
+    cursor: url('../assets/pointer-heart.png') 12 12, pointer !important;
 
 }
 
@@ -105,10 +106,12 @@ body {
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /*     justify-content: center; */
     align-items: center;
     min-height: 100vh;
     font-family: 'Times New Roman', Times, serif;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 @keyframes gradient {
@@ -127,27 +130,47 @@ body {
 
 h1 {
     color: #a84f76;
-    font-size: 475%;
+    font-size: 3.5rem;
     /*     text-transform: uppercase; */
     font-family: "Honk", system-ui;
-    margin-bottom: 10px;
+    margin: 20px 0 5px;
+    margin-top: 0;
     letter-spacing: 2px;
     cursor: none;
 }
 
 #message {
     color: #a84f76;
-    margin-bottom: 20px;
+    margin: 0;
+    color: #a84f76;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: none;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 .board {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 400px;
-    height: 400px;
+    width: min(400px, 80vw);
+    aspect-ratio: 1;
+    height: auto;
     display: flex;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
 .crds {
@@ -175,7 +198,7 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     width: 350px;
-    margin-top: 30px;
+    margin: 20px 0;
     padding: 12px 24px;
     border: none;
     border-radius: 15px;
@@ -202,7 +225,6 @@ h1 {
         /* , -5px -5px 10px #fff0f6 */
     ;
     font-family: 'Times New Roman', Times, serif;
-
 }
 
 .crds:hover,

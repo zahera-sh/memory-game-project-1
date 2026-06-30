@@ -3,14 +3,20 @@
 const cardsEls = document.querySelectorAll(".crds");
 const messageEl = document.querySelector("#message");
 const resetBtnEl = document.querySelector("#reset");
-const movesEl = document.querySelector("#moves")
-const matchedEl = document.querySelector("#matched")
+const movesEl = document.querySelector("#moves");
+const matchedEl = document.querySelector("#matched");
+const startBtnEl = document.querySelector("#start");
+const startEl = document.querySelector(".start-screen");
+const nameInputEl = document.querySelector("#name-input");
 
-/* console.log(cardsEls)
-console.log(messageEl)
-console.log(resetBtnEl)
-console.log(movesEl)
-console.log(matchedEl) */
+/* console.log(cardsEls);
+console.log(messageEl);
+console.log(resetBtnEl);
+console.log(movesEl);
+console.log(matchedEl);
+console.log(startBtnEl);
+console.log(startEl);
+console.log(nameInputEl); */
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -29,11 +35,13 @@ let firstCard, secondCard;
 let flippedCards = [];
 let matchedCards = [];
 let moves = 0;
+let matched = 0;
 let winner = false;
 let lockBoard = false;
 let message;
 let gameBoard;
-let matched = 0;
+let gameLevel;
+let userName;
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -49,14 +57,19 @@ function render() {
         }
     })
 
-    movesEl.textContent = `Moves: ${moves}`
-    matchedEl.textContent = `Matched: ${matched}/8`
+    movesEl.textContent = `Moves: ${moves}`;
+    matchedEl.textContent = `Matched: ${matched} | ${gameLevel}`;
 
 }
 
 
 
 function initGame() {
+
+    userName = nameInputEl.value;
+        console.log(userName);
+    
+    startEl.classList.add("hidden");
 
     gameBoard = [...board].sort(() => Math.random() - 0.5);
 
@@ -67,6 +80,7 @@ function initGame() {
     moves = 0;
     winner = false;
     lockBoard = false;
+    gameLevel = (Number(board.length)/2);
 
     render()
 
@@ -81,14 +95,14 @@ function handleClick(event) {
     const cardIndex = Number(event.target.id);
      
     if (firstCard === cardIndex) {
-            console.log("SAME CARD")
-            return
+            console.log("SAME CARD");
+            return;
         }
 
     /*     const clickedCard = gameBoard[cardIndex]; */
 
-    moves = Number(flippedCards +++1)
-        console.log(moves)
+    moves = Number(flippedCards +++1);
+        console.log(moves);
 
     if (matchedCards.includes(cardIndex)) return;
 
@@ -98,7 +112,7 @@ function handleClick(event) {
 
         render();
 
-        return
+        return;
     }
 
     else if (secondCard === null || secondCard === undefined) {
@@ -106,7 +120,7 @@ function handleClick(event) {
         secondCard = cardIndex;
         console.log("Second card:", secondCard);
 
-        render()
+        render();
 
         lockBoard = true;
 
@@ -116,7 +130,7 @@ function handleClick(event) {
             firstCard = null;
             secondCard = null;
             lockBoard = false;
-            console.log(matchedCards)
+            console.log(matchedCards);
         }
 
         else {
@@ -128,17 +142,17 @@ function handleClick(event) {
 
                 lockBoard = false;
 
-                render()
+                render();
 
-            }, 1000)
+            }, 1000);
         }
     }
 
-    matched = Number(matchedCards.length /2)
+    matched = Number(matchedCards.length /2);
     
-    checkForWinner()
+    checkForWinner();
 
-    render()
+    render();
 
 }
 
@@ -146,19 +160,24 @@ function handleClick(event) {
 
 function checkForWinner() {
         if (matchedCards.length === board.length) {
-            winner = true
-            console.log("WINNER!")
-            return
+            winner = true;
+            console.log("WINNER!");
+            return;
         }
 }
 
-
-initGame()
+/* initGame() */
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 cardsEls.forEach((card) => {
-    card.addEventListener("click", handleClick)
+    card.addEventListener("click", handleClick);
 })
 
-resetBtnEl.addEventListener("click", initGame)
+resetBtnEl.addEventListener("click", initGame);
+startBtnEl.addEventListener("click", initGame);
+
+startBtnEl.disabled = true;
+nameInputEl.addEventListener("input", () => {
+    startBtnEl.disabled = nameInputEl.value.trim() === "";
+});
